@@ -652,7 +652,8 @@ int adventurer_card(int drawntreasure, int currentPlayer, struct gameState* stat
 	  shuffle(currentPlayer, state);
 	}
 	drawCard(currentPlayer, state);
-	cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
+	cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]];//top card of hand is most recently drawn card. 
+																			//bug ==> '-1' taken out of 'handCount[currentPlayer]-1'
 	if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
 	  drawntreasure++;
 	else{
@@ -671,7 +672,7 @@ int adventurer_card(int drawntreasure, int currentPlayer, struct gameState* stat
 int smithy_card (int currentPlayer, struct gameState* state, int handPos) {
 	int i;
 	//+3 Cards
-    for (i = 0; i < 3; i++)
+    for (i = 1; i < 3; i++)		//bug ==> 'i = 0' changed to 'i = 1'
 	{
 	  drawCard(currentPlayer, state);
 	}
@@ -703,7 +704,7 @@ int remodel_card(int currentPlayer, struct gameState* state, int handPos, int ch
 	  return -1;
 	}
 
-    gainCard(choice2, state, 0, currentPlayer);
+    gainCard(choice2, state, 1, currentPlayer); //bug ==> toFlag set to 1 (deck) instead of 0 (discard)
 
     //discard card from hand
     discardCard(handPos, currentPlayer, state, 0);
@@ -727,13 +728,13 @@ int cutpurse_card(int currentPlayer, struct gameState* state, int handPos){
 	updateCoins(currentPlayer, state, 2);
     for (i = 0; i < state->numPlayers; i++)
 	{
-	  if (i != currentPlayer)
+	  if (i == currentPlayer)  //bug ==> '==' instead of '!='
 	    {
 	      for (j = 0; j < state->handCount[i]; j++)
 		{
 		  if (state->hand[i][j] == copper)
 		    {
-		      discardCard(j, i, state, 0);
+		      discardCard(j, i, state, 1); 
 		      break;
 		    }
 		  if (j == state->handCount[i])
