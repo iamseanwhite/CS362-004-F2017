@@ -327,18 +327,24 @@ int fullDeckCount(int player, int card, struct gameState *state) {
 
   for (i = 0; i < state->deckCount[player]; i++)
     {
-      if (state->deck[player][i] == card) count++;
+      if (state->deck[player][i] == card) {
+		  count++;
+	  }
     }
 
   for (i = 0; i < state->handCount[player]; i++)
     {
-      if (state->hand[player][i] == card) count++;
+      if (state->hand[player][i] == card) {
+		count++;  
+	  } 
     }
 
   for (i = 0; i < state->discardCount[player]; i++)
     {
-      if (state->discard[player][i] == card) count++;
-    }
+      if (state->discard[player][i] == card) {
+		  count++;
+	  }
+	}
 
   return count;
 }
