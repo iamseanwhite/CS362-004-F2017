@@ -1,0 +1,19 @@
+1)	Smithy - The bug was in the line 
+		for (i = 0; i <= 3; i++), 
+	where the original ‘<’ was changed to ‘<=’.
+
+2)	Adventure - In line 
+		while(z>=0){
+	'z' should be 'z-1'
+
+3)	Remodel - The line that compares costs,
+		if ((getCost(state->hand[currentPlayer][choice1]) + 2) > getCost(choice2))
+	does not work. A more accurate comparison would be:
+		if ((getCost(state->hand[currentPlayer][choice1]) ) < getCost(choice2) - 2)
+
+4)	discardCard - DiscardCount does not increment even though card was not trashed. 
+	The card is only placed in the playedCards pile.
+
+5)	isGameOver - Game should be over when three supply piles are emptied. 
+	This does not occur if one of the piles has index 25 or 26 because the for loops 
+	only goes up to 24, not 26.
