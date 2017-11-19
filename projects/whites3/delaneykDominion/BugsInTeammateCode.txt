@@ -1,6 +1,6 @@
 1)	Smithy - The bug was in the line 
 		for (i = 0; i <= 3; i++), 
-	where the original ‘<’ was changed to ‘<=’.
+	where the original â€˜<â€™ was changed to â€˜<=â€™.
 
 2)	Adventure - In line 
 		while(z>=0){
@@ -11,7 +11,7 @@
 	does not work. A more accurate comparison would be:
 		if ((getCost(state->hand[currentPlayer][choice1]) ) < getCost(choice2) - 2)
 
-3.1)The Remodel function also allows you to trash the remodel card itself, which is 
+3.1)	The Remodel function also allows you to trash the remodel card itself, which is 
 	not allowed in the game.
 
 4)	discardCard - DiscardCount does not increment even though card was not trashed. 
